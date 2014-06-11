@@ -24,7 +24,7 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
-            'include_html': True,
+            #'include_html': True,  # Its pretty verbose, doesn't fold/unfold
             'filters': ['loglimit', 'allowed_hosts'],
         },
     },
