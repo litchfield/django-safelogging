@@ -11,7 +11,6 @@ class LogLimitFilter(object):
     _errors = {}
         
     def filter(self, record):
-        
         if not hasattr(self, 'rate'):
             # Need to wait until run time to read settings
             from django.conf import settings
@@ -19,7 +18,9 @@ class LogLimitFilter(object):
             self.max_keys = getattr(settings, 'LOGLIMIT_MAX_KEYS', 100)
             self.cache_prefix = getattr(settings, 'LOGLIMIT_CACHE_PREFIX', 'LOGLIMIT')
         
-        tb = '\n'.join(traceback.format_exception(*record.exc_info))
+        tb = 'No traceback'
+        if record.exc_info:
+            tb = '\n'.join(traceback.format_exception(*record.exc_info))
 
         # Track duplicate errors
         duplicate = False

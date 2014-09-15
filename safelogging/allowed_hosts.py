@@ -12,8 +12,10 @@ except ImportError:
 
 def suppress_allowed_hosts(record):
     if AllowedHostException:
+        if record.name == 'django.security.DisallowedHost':
+            return False
         if record.exc_info:
             exc_value = record.exc_info[1]
             if isinstance(exc_value, AllowedHostException):
-              return False
+                return False
     return True

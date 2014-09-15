@@ -25,7 +25,7 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
             #'include_html': True,  # Its pretty verbose, doesn't fold/unfold
-            'filters': ['loglimit', 'allowed_hosts'],
+            'filters': ['allowed_hosts', 'loglimit'],
         },
     },
     'filters': {
@@ -41,7 +41,12 @@ LOGGING = {
         'django.request':{
             'handlers': ['mail_admins'],
             'level': 'ERROR',
-            'propagate': True,
+            'propagate': False,
+        },
+        'django.security': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': False,
         },
     },
 }
